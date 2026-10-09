@@ -1,0 +1,17 @@
+# Jupyter and Python temporary files
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+
+# Reusable Cboe download cache
+_cboe_cache/
+
+# Local Python environments and settings
+.venv/
+venv/
+.env
+.env.local
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db

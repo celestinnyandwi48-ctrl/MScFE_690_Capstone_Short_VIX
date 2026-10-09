@@ -1,0 +1,12 @@
+# Notebook dependencies; this is not a fully pinned or newly tested environment.
+# Inspected notebook metadata: Python 3.11.15.
+# The futures notebook itself specifies pandas>=2.0,<3.0.
+pandas>=2.0,<3.0
+numpy
+matplotlib
+statsmodels
+yfinance
+openpyxl
+ipython
+ipykernel
+notebook

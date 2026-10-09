@@ -1,83 +1,77 @@
-# MSCFE 690 Capstone Project: Volatility & Risk
+# MScFE 690 Capstone — Short-VIX Exposure: An ETF-Based Trading System
 
-**Authors:** Edgar Nava & Celestin NYANDWI 
-**Institution:** WorldQuant University — Master of Science in Financial Engineering (MScFE)  
-**Project Status:** Active / Capstone Phase  
+**WorldQuant University · Group 17843**  
+**Authors:** Edgar Nava and Celestin NYANDWI
 
----
+This project studies whether information from VIX, VVIX, and the VIX futures curve can improve the return–risk balance of short-volatility exposure through an ETF-based trading system.
 
-## 🚀 Project Overview
-This repository contains the Python code and data for our Capstone, **Short-VIX Exposure: An ETF-Based Trading System**. We study short-volatility exposure through ETF ($\text{SVXY}$) and whether trading signals based on the Chicago Board Options Exchange (CBOE) Volatility Index ($\text{VIX}$), Volatility of Volatility Index ($\text{VVIX}$), and VIX Futures ($\text{F1 and F2}$)  can improve its results.
+This repository contains the current research notebooks and data: data retrieval, VIX futures history, semi-synthetic SVXY series, a descriptive VIX study, and an SMA crossover experiment. The published CSV snapshots end on **September 16, 2026**. The analyses use earlier cutoffs as described below.
 
-We begin by studying VIX statistics and volatility episodes to determine the VIX state boundaries. Then, we estimate separate transition matrices for 5-, 10-, and 15-trading-day horizons. Our intention is to identify possible “windows of opportunity” and test whether they help improve the performance of the trading signals.
-
-We divide the data into development, validation, and test sets. We develop the trading signals using development data and refine them using validation data. We use the combined development and validation data to determine the final states and transition matrices. On the unseen test data, we compare the results of the signals with and without the opportunity windows.
-
-The analysis includes SVXY data and a synthetic SVXY −1× series. We compare the trading strategy with continuous exposure to the same synthetic series and the S&P 500 total-return benchmark. We include trading costs and evaluate net returns, Sharpe ratios, maximum drawdowns, and other risk measures.
-
-The data end date is September 16, 2026, and will remain fixed for the entire Capstone.
-
----
-
-## 📁 Repository Structure
+## Repository structure
 
 ```text
-mscfe_690_capstone/
-├── data/
-│   ├── raw/                           # Original source datasets
-│   │   ├── VIX_data.csv                # VIX daily OHLC
-│   │   ├── VVIX_data.csv               # VVIX daily OHLC
-│   │   ├── SVXY_data.csv               # Observed SVXY daily OHLC
-│   │   ├── SP500_data.csv              # S&P 500 price-index data
-│   │   └── VIX_futures_data.csv        # VIX futures term structure, including F1 and F2
-│   ├── processed/
-│   │   ├── market_data.csv             # Cleaned and aligned market data
-│   │   └── SVXY_synthetic_minus1x.csv  # Constructed synthetic −1× series
-│   └── splits/
-│       ├── development.csv            # Strategy development observations
-│       ├── validation.csv             # Strategy refinement and selection observations
-│       └── test.csv                   # Unseen observations for final evaluation
-│
+.
+├── README.md
+├── requirements.txt
+├── .gitignore
 ├── notebooks/
-│   ├── 00_data_preparation.ipynb       # Data checks, alignment, synthetic series and splits
-│   ├── 01_VIX_analysis.ipynb           # VIX statistics, volatility episodes and state boundaries
-│   ├── 02_markov_analysis.ipynb        # Transition matrices, diagnostics and opportunity windows
-│   ├── 03_strategy_development.ipynb   # Candidate trading rules and development simulations
-│   ├── 04_strategy_validation.ipynb    # Refine/select rules and finalize the frozen model
-│   └── 05_final_test.ipynb             # Unseen-data evaluation, comparisons and reporting
-│
-├── src/
-│   ├── data_preparation.py             # Load, check, clean, align and split datasets
-│   ├── vix_analysis.py                 # VIX statistics and volatility-episode analysis
-│   ├── markov_model.py                 # State assignment and separate 5-, 10- and 15-day matrices
-│   ├── markov_validation.py            # Transition diagnostics and Chapman–Kolmogorov checks
-│   ├── opportunity_windows.py          # Translate transition information into window rules
-│   ├── synthetic_svxy.py               # Construct the synthetic SVXY −1× series
-│   ├── signals.py                      # Indicators, combined filters and trading signals
-│   ├── backtest.py                     # Trades, execution timing, costs, cash and positions
-│   ├── performance.py                  # Net returns, Sharpe ratio, drawdowns and risk statistics
-│   └── reporting.py                    # Export settings, trade logs, tables and figures
-│
-├── config/
-│   ├── data_settings.yaml             # Data paths, fixed cutoff and chronological split dates
-│   └── strategy_settings.yaml         # Candidate rules, parameters, costs and execution settings
-│
-├── output/
-│   ├── vix_analysis/                  # Descriptive statistics and volatility-episode figures
-│   ├── frozen_model/                  # Final model estimated before testing
-│   │   ├── state_boundaries.csv
-│   │   ├── transition_matrix_5d.csv
-│   │   ├── transition_matrix_10d.csv
-│   │   ├── transition_matrix_15d.csv
-│   │   ├── opportunity_windows.csv
-│   │   └── final_settings.csv        # Selected rules and parameters used in the final test
-│   ├── development/                   # Candidate results, trade logs and figures
-│   ├── validation/                    # Validation results and strategy-selection comparisons
-│   └── test/
-│       ├── without_windows/           # Selected strategy without opportunity-window information
-│       ├── with_windows/              # Same strategy incorporating opportunity-window information
-│       ├── benchmarks/                # Continuous synthetic −1× exposure and S&P 500 total return
-│       └── comparisons/               # Comparative performance tables and figures
-│
-├── requirements.txt                   # Python dependencies and versions
-└── README.md                          # Project overview, methodology and execution instructions
+│   ├── notebooks_00_vix_vvix_svxy_data_retrieval.ipynb
+│   ├── VIX_Futures_CBOE_F1_F2.ipynb
+│   ├── Synthetic_SVXY-ONEx.ipynb
+│   ├── Synthetic_SVXY-HALFx.ipynb
+│   ├── VIX_Close_Study_1.ipynb
+│   └── SMA_crossover_trading_system.ipynb
+└── data/
+    ├── README.md
+    ├── raw/
+    │   ├── VIX_data.csv
+    │   ├── VVIX_data.csv
+    │   ├── SVXY_data.csv
+    │   └── SPVIXSTR.xlsx
+    └── processed/
+        ├── VIX_Futures_Term_Structure_F1_F2.csv
+        ├── SVXY_synth-ONEx.csv
+        └── SVXY_synth-HALFx.csv
+```
+
+The folders organize the published files. Notebook contents, relative paths, saved outputs, and calculation logic are preserved. This is an organized research snapshot; the notebooks do not automatically resolve the new repository folders.
+
+## Current notebooks and execution order
+
+All notebook links below point into `notebooks/`. Input and output paths identify where the distributed files are stored, rather than paths embedded in notebook code.
+
+| Stage | Notebook | Inputs | Main output or study |
+|---|---|---|---|
+| 1a | [VIX, VVIX and SVXY retrieval](notebooks/notebooks_00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_data.csv`, `data/raw/SVXY_data.csv` |
+| 1b | [Cboe F1/F2 retrieval](notebooks/VIX_Futures_CBOE_F1_F2.ipynb) | Cboe monthly VX contract histories | `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` |
+| 2a | [Synthetic SVXY −1x](notebooks/Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
+| 2b | [Synthetic SVXY −0.5x](notebooks/Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
+| 3a | [VIX Close Study](notebooks/VIX_Close_Study_1.ipynb) | `data/raw/VIX_data.csv`; `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` | Descriptive statistics, daily ranges, percentile states, transition and episode studies; tables and plots remain in the notebook |
+| 3b | [SMA crossover experiment](notebooks/SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
+
+Stages 1a and 1b are independent. Each synthetic notebook independently uses the same two raw inputs. The VIX study uses the VIX and futures files; the SMA experiment uses the ONEx synthetic file. Existing CSVs allow these downstream notebooks to be used without downloading or reconstructing the data again.
+
+## Working with the unchanged notebooks
+
+To execute a notebook, make a **separate working folder** outside this repository. Copy the desired notebook and its required input files into that folder, retaining their filenames. Launch the notebook with that folder as its current working directory (`Path.cwd()`). Copying an entire set of notebooks and all seven input/output data files into one working folder is also possible.
+
+The VIX/VVIX/SVXY retrieval notebook writes its three CSVs into a `data/` subfolder of the working directory. Before running the synthetic or analysis notebooks with newly retrieved data, copy those three CSVs into the working folder alongside the notebooks. The futures and synthetic notebooks save their CSVs in the current working directory; the futures downloader also creates `_cboe_cache/` there. Copy a resulting file into its repository distribution folder only when intentionally updating the published snapshot.
+
+Install the packages listed in [requirements.txt](requirements.txt) in the notebook environment. The inspected notebook metadata reports Python **3.11.15**; Python 3.11 is the documented baseline. The package list records imported dependencies and the existing pandas constraint; it is not a newly tested or fully pinned environment.
+
+The reorganization does not rerun the notebooks. Their saved tables, charts, and other outputs remain the existing research results. Rerunning download cells requires internet access, may retrieve provider revisions, and can overwrite the working copies of the CSVs.
+
+## Study periods and experiment boundaries
+
+- **VIX Close Study:** March 26, 2004–December 29, 2023 in the stored data. It studies Close-based states defined by P55, P76, P90, and P96, including 5- and 15-session outcomes. VIX index-point changes are descriptive measures, not investment returns.
+- **SMA Development:** October 4, 2011–December 31, 2020. The search tests integer windows `d1 = 5…30`, `d2 = 15…200`, with `d1 < d2`. Candidates require CAGR strictly above 10% and maximum drawdown magnitude strictly below 40%; Development Sharpe selects among qualifying candidates.
+- **SMA Validation:** January 4, 2021–December 29, 2023. The selected rule is applied without retuning, with a fresh account and earlier prices used only to initialize the moving averages.
+- **Final test:** data from 2024 onward are excluded from these analyses and reserved for a later final evaluation. This repository does not present a completed final test.
+
+The SMA experiment uses synthetic ONEx prices, 100% cash allocation, a 15% Close-based trailing stop, US$0.005 commission per share, and 0.1% adverse slippage per trade. It permits fractional units and uses the same daily Close for signals and the execution reference. These are research assumptions; saved results do not establish achievable live performance. The current rules followed exploratory experiments.
+
+## Data and next stages
+
+See [data/README.md](data/README.md) for sources, coverage, columns, futures rescaling, and the SVXY synthetic construction. The synthetic series are retrospective research scenarios, including an explicit February 2018 event adjustment.
+
+Further strategy development, final test evaluation, and the final capstone report remain separate future stages. This repository currently documents the files listed above; it does not claim a production trading system or additional unimplemented modules.
