@@ -1,7 +1,7 @@
 # MScFE 690 Capstone — Short-VIX Exposure: An ETF-Based Trading System
 
 **WorldQuant University · Group 17843**  
-**Authors:** Edgar Nava and Celestin NYANDWI
+**Authors:** Edgar NAVA and Celestin NYANDWI
 
 This project studies whether information from VIX, VVIX, and the VIX futures curve can improve the return–risk balance of short-volatility exposure through an ETF-based trading system.
 
