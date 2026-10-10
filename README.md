@@ -15,12 +15,12 @@ This repository contains the current research notebooks and data: data retrieval
 ├── requirements.txt
 ├── .gitignore
 ├── notebooks/
-│   ├── notebooks_00_vix_vvix_svxy_data_retrieval.ipynb
-│   ├── VIX_Futures_CBOE_F1_F2.ipynb
-│   ├── Synthetic_SVXY-ONEx.ipynb
-│   ├── Synthetic_SVXY-HALFx.ipynb
-│   ├── VIX_Close_Study_1.ipynb
-│   └── SMA_crossover_trading_system.ipynb
+│   ├── 00_vix_vvix_svxy_data_retrieval.ipynb
+│   ├── 01_VIX_Futures_CBOE_F1_F2.ipynb
+│   ├── 02_Synthetic_SVXY-ONEx.ipynb
+│   ├── 03_Synthetic_SVXY-HALFx.ipynb
+│   ├── 04_VIX_Close_Study_1.ipynb
+│   └── 05_SMA_crossover_trading_system.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -38,18 +38,18 @@ The folders organize the published files. Notebook contents, relative paths, sav
 
 ## Current notebooks and execution order
 
-All notebook links below point into `notebooks/`. Input and output paths identify where the distributed files are stored, rather than paths embedded in notebook code.
+The `00_` to `05_` prefixes keep the notebooks sorted in the recommended workflow order. All notebook links below point into `notebooks/`. Input and output paths identify where the distributed files are stored, rather than paths embedded in notebook code.
 
 | Stage | Notebook | Inputs | Main output or study |
 |---|---|---|---|
-| 1a | [VIX, VVIX and SVXY retrieval](notebooks/notebooks_00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_data.csv`, `data/raw/SVXY_data.csv` |
-| 1b | [Cboe F1/F2 retrieval](notebooks/VIX_Futures_CBOE_F1_F2.ipynb) | Cboe monthly VX contract histories | `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` |
-| 2a | [Synthetic SVXY −1x](notebooks/Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
-| 2b | [Synthetic SVXY −0.5x](notebooks/Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
-| 3a | [VIX Close Study](notebooks/VIX_Close_Study_1.ipynb) | `data/raw/VIX_data.csv`; `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` | Descriptive statistics, daily ranges, percentile states, transition and episode studies; tables and plots remain in the notebook |
-| 3b | [SMA crossover experiment](notebooks/SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
+| 00 | [VIX, VVIX and SVXY retrieval](notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_data.csv`, `data/raw/SVXY_data.csv` |
+| 01 | [Cboe F1/F2 retrieval](notebooks/01_VIX_Futures_CBOE_F1_F2.ipynb) | Cboe monthly VX contract histories | `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` |
+| 02 | [Synthetic SVXY −1x](notebooks/02_Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
+| 03 | [Synthetic SVXY −0.5x](notebooks/03_Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
+| 04 | [VIX Close Study](notebooks/04_VIX_Close_Study_1.ipynb) | `data/raw/VIX_data.csv`; `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` | Descriptive statistics, daily ranges, percentile states, transition and episode studies; tables and plots remain in the notebook |
+| 05 | [SMA crossover experiment](notebooks/05_SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
 
-Stages 1a and 1b are independent. Each synthetic notebook independently uses the same two raw inputs. The VIX study uses the VIX and futures files; the SMA experiment uses the ONEx synthetic file. Existing CSVs allow these downstream notebooks to be used without downloading or reconstructing the data again.
+Stages 00 and 01 are independent. Each synthetic notebook independently uses the same two raw inputs. The VIX study uses the VIX and futures files; the SMA experiment uses the ONEx synthetic file. Existing CSVs allow these downstream notebooks to be used without downloading or reconstructing the data again.
 
 ## Working with the unchanged notebooks
 
