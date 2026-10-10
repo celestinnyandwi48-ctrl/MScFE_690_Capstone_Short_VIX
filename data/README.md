@@ -20,13 +20,13 @@ The Excel workbook also contains additional market-data columns. The synthetic n
 
 ## Market input data
 
-`VIX_data.csv`, `VVIX_data.csv`, and `SVXY_data.csv` originate from Yahoo Finance through `yfinance`. They retain daily OHLC prices and the source trading calendars. Consult [the retrieval notebook](../notebooks/notebooks_00_vix_vvix_svxy_data_retrieval.ipynb) for its download parameters and cleaning steps. The CSVs are the supplied study inputs; they are not independently reconstructed provider histories.
+`VIX_data.csv`, `VVIX_data.csv`, and `SVXY_data.csv` originate from Yahoo Finance through `yfinance`. They retain daily OHLC prices and the source trading calendars. Consult [the retrieval notebook](../notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) for its download parameters and cleaning steps. The CSVs are the supplied study inputs; they are not independently reconstructed provider histories.
 
 `SPVIXSTR.xlsx` is the manually downloaded [Investing.com SPVIXSTR history](https://www.investing.com/indices/sp-500-vix-short-term-futures-tri-historical-data) used by both synthetic notebooks. SPVIXSTR is the total-return version of the S&P 500 VIX Short-Term Futures Index. It represents rolling short-term VIX futures exposure and includes a collateral-return component; it is not spot VIX. See the [S&P index methodology](https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-vix-futures-indices.pdf).
 
 ## Cboe F1/F2 history
 
-[VIX_Futures_CBOE_F1_F2.ipynb](../notebooks/VIX_Futures_CBOE_F1_F2.ipynb) downloads monthly VX histories from [Cboe](https://www.cboe.com/markets/us/futures/market-statistics/historical-data/futures/) and constructs F1/F2 from the first two available, still-outstanding monthly contracts at the end of each observation date. Weekly contracts are excluded; early listings did not cover every calendar month.
+[01_VIX_Futures_CBOE_F1_F2.ipynb](../notebooks/01_VIX_Futures_CBOE_F1_F2.ipynb) downloads monthly VX histories from [Cboe](https://www.cboe.com/markets/us/futures/market-statistics/historical-data/futures/) and constructs F1/F2 from the first two available, still-outstanding monthly contracts at the end of each observation date. Weekly contracts are excluded; early listings did not cover every calendar month.
 
 F1 and F2 contain daily settlement prices. A contract enters the available universe at its first positive settlement. Leading zero placeholders are ignored; subsequent missing settlements are not filled or replaced with another contract. Prices before **March 26, 2007** are divided by ten, following the [Cboe contract rescaling](https://cdn.cboe.com/resources/regulation/circulars/general/CFE-IC-2007-003.pdf), so the history uses consistent volatility-point units. This construction extends the dataset to **March 26, 2004**.
 
