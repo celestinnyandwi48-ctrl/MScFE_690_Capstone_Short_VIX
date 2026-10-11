@@ -3,9 +3,9 @@
 **WorldQuant University · Group 17843**  
 **Authors:** Edgar NAVA and Celestin NYANDWI
 
-This project studies whether information from VIX, VVIX, and the VIX futures curve can improve the return–risk balance of short-volatility exposure through an ETF-based trading system.
+This project investigates if the return-risk profile of short-volatility exposure can be improved by information from VIX, VVIX and the VIX futures curve in an exchange-traded fund (ETF) based trading system.
 
-This repository contains the current research notebooks and data: data retrieval, VIX futures history, semi-synthetic SVXY series, a descriptive VIX study, and an SMA crossover experiment. The published CSV snapshots end on **September 16, 2026**. The analyses use earlier cutoffs as described below.
+Here are the current research notebooks and data: data retrieval, VIX futures history, semi-synthetic SVXY series, a descriptive VIX study, and SMA crossover experiment. The CSV snapshots published end on 16 September 2026. Analyzes use earlier cutoffs as detailed below
 
 ## Repository structure
 
@@ -49,27 +49,22 @@ The `00_` to `05_` prefixes keep the notebooks sorted in the recommended workflo
 | 04 | [VIX Close Study](notebooks/04_VIX_Close_Study_1.ipynb) | `data/raw/VIX_data.csv`; `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` | Descriptive statistics, daily ranges, percentile states, transition and episode studies; tables and plots remain in the notebook |
 | 05 | [SMA crossover experiment](notebooks/05_SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
 
-Stages 00 and 01 are independent. Each synthetic notebook independently uses the same two raw inputs. The VIX study uses the VIX and futures files; the SMA experiment uses the ONEx synthetic file. Existing CSVs allow these downstream notebooks to be used without downloading or reconstructing the data again.
+Stages 00 and 01 are not correlated . Each synthetic notebook uses the same two raw inputs independently . We use the VIX and futures files for the VIX study and the ONEx synthetic file for the SMA experiment. These downstream notebooks can be run on existing CSVs and do not require downloading/reconstructing the data again.
 
 ## Working with the unchanged notebooks
 
-To execute a notebook, make a **separate working folder** outside this repository. Copy the desired notebook and its required input files into that folder, retaining their filenames. Launch the notebook with that folder as its current working directory (`Path.cwd()`). Copying an entire set of notebooks and all seven input/output data files into one working folder is also possible.
+To run a notebook, make a separate working folder outside this repository. Copy the notebook you want and any input files it needs into that folder. Don't rename the original files. Open the notebook with that folder as the working directory (Path.cwd(). You can also copy a complete set of notebooks and all seven input/output data files into one working folder.
 
-The VIX/VVIX/SVXY retrieval notebook writes its three CSVs into a `data/` subfolder of the working directory. Before running the synthetic or analysis notebooks with newly retrieved data, copy those three CSVs into the working folder alongside the notebooks. The futures and synthetic notebooks save their CSVs in the current working directory; the futures downloader also creates `_cboe_cache/` there. Copy a resulting file into its repository distribution folder only when intentionally updating the published snapshot.
+The VIX/VVIX/SVXY retrieval notebook writes its three CSVs to a data/ subfolder of the working directory. Copy those three CSVs to the working folder with the notebooks and then run the synthetic or analysis notebooks with the newly pulled data. Futures and synthetic notebooks save their CSVs to the current working directory; the futures downloader also creates _cboe_cache/ there. Copy a resulting file to its repository distribution folder. Update the published snapshot only if you are intentionally updating the published snapshot.
 
-Install the packages listed in [requirements.txt](requirements.txt) in the notebook environment. The inspected notebook metadata reports Python **3.11.15**; Python 3.11 is the documented baseline. The package list records imported dependencies and the existing pandas constraint; it is not a newly tested or fully pinned environment.
+Install the packages in requirements.txt to the notebook environment. The notebook metadata reports python 3.11.15; python 3.11 is the documented baseline. The package list lists the imported dependencies and the current pandas constraint and not a new tested environment or a fully pinned environment.
 
-The reorganization does not rerun the notebooks. Their saved tables, charts, and other outputs remain the existing research results. Rerunning download cells requires internet access, may retrieve provider revisions, and can overwrite the working copies of the CSVs.
-
-## Study periods and experiment boundaries
-
-- **VIX Close Study:** March 26, 2004–December 29, 2023 in the stored data. It studies Close-based states defined by P55, P76, P90, and P96, including 5- and 15-session outcomes. VIX index-point changes are descriptive measures, not investment returns.
-- **SMA Development:** October 4, 2011–December 31, 2020. The search tests integer windows `d1 = 5…30`, `d2 = 15…200`, with `d1 < d2`. Candidates require CAGR strictly above 10% and maximum drawdown magnitude strictly below 40%; Development Sharpe selects among qualifying candidates.
-- **SMA Validation:** January 4, 2021–December 29, 2023. The selected rule is applied without retuning, with a fresh account and earlier prices used only to initialize the moving averages.
-- **Final test:** data from 2024 onward are excluded from these analyses and reserved for a later final evaluation. This repository does not present a completed final test.
-
-The SMA experiment uses synthetic ONEx prices, 100% cash allocation, a 15% Close-based trailing stop, US$0.005 commission per share, and 0.1% adverse slippage per trade. It permits fractional units and uses the same daily Close for signals and the execution reference. These are research assumptions; saved results do not establish achievable live performance. The current rules followed exploratory experiments.
-
+The reorganization does not re-run the notebooks. Existing research results are their saved tables, charts and other outputs. Download cells may pull in provider revisions and may need internet access to run again. Download cells can overwrite the working copies of the CSVs.
+## Study periods and experiment constraints
+VIX Close Study: we analyze the Close-based states as of March 26, 2004 – December 29, 2023, stored in the database. For the selected states defined by P55, P76, P90, and P96, we consider the 5- and 15-session outcomes; VIX index-point changes are descriptive statistics and should not be confused with investment returns.
+SMA Development: the fitting period is October 4, 2011 – December 31, 2020. We search for integer d1 = 5…30 and d2 = 15…200, where d1 < d2, which meet the criteria of CAGR > 10% and max drawdown < -40%, and calculate the Development Sharpe ratio.
+SMA Validation: January 4, 2021 – December 29, 2023. We apply the selected SMA rule without optimization and use a fresh account with the earlier prices to initialize the moving averages. The latest data are excluded from consideration – they will be used to perform a final test in the future, but they are not available yet. Suffice it to say that this repository does not include the final test results.
+The SMA experiment uses the synthetic ONEx prices, 100% cash allocation, 15% Close-based trailing stop, US$0.005 per-share commission, and 0.1% adverse slippage per trade to demonstrate long-only performance. Fractional units are allowed, and I use the same daily Close price for both signaling and execution bars. These are research assumptions; the saved results should not be confused with live performance. In this particular case, the rules were applied in exploration mode.
 ## Data and next stages
 
 See [data/README.md](data/README.md) for sources, coverage, columns, futures rescaling, and the SVXY synthetic construction. The synthetic series are retrospective research scenarios, including an explicit February 2018 event adjustment.
