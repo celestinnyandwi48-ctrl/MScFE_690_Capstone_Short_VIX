@@ -39,6 +39,7 @@ The repository structure organizes the published files by separating the noteboo
 ## Current notebooks and execution order
 
 The `00_` to `05_` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The column `Main output or study` indicate where is the data located in this repository, but not where the data is required or stored when running the code.
+All notebooks contain extensive explanations and comments to help readers understand the sequence of steps followed.
 
 | Stage | Notebook | Inputs | Main output or study |
 |---|---|---|---|
