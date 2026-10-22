@@ -3,9 +3,9 @@
 **WorldQuant University · Group 17843**  
 **Authors:** Edgar NAVA and Celestin NYANDWI
 
-This project investigates whether the return-risk profile of short-volatility exposure, using a short-VIX exchange-traded fund (ETF), can be improved by incorporating information from VIX, VVIX and the VIX futures curve. The idea is to develop a trading system based conditional exposure, using a set of rules derived from signals provided by those time series. 
+This project investigates whether the return-risk profile of short-volatility exposure, using a short-VIX exchange-traded fund (ETF), can be improved by incorporating information from VIX and the VIX futures curve. The idea is to develop a trading system based on conditional exposure, using a set of rules derived from signals provided by those time series. VVIX is also explored as a possible additional signal, although the current model does not use it.
 
-The ETFs selected to perform our studies are two synthetic versions of SVXY, since said ETF changed its investment objective from -1x to -0.5x on February 28th 2018, after Volmageddon.
+Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure, since the ETF changed its investment objective from -1x to -0.5x on February 28th 2018, after Volmageddon. We also apply the model to actual SVIX data, both over the test period and over its full available history.
 
 ## Repository structure
 
