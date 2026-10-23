@@ -41,4 +41,6 @@ The [−1x SMA notebook](../notebooks/05_SMA_crossover_trading_system.ipynb) use
 
 [Model 2073 — Synthetic SVXY −1x](../notebooks/07-Model_2073_SVXY-ONEx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-ONEx.csv](processed/SVXY_synth-ONEx.csv), through September 16, 2026. To run notebook 07, place both files in the same folder as the notebook, keeping their existing filenames. VVIX and the futures curve are not inputs to this model.
 
-The model's performance tables and plots are stored in notebook 07. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
+[Model 2073 — Synthetic SVXY −0.5x](../notebooks/08-Model_2073_SVXY-HALFx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-HALFx.csv](processed/SVXY_synth-HALFx.csv), with the same cutoff. Place both files in the same folder as notebook 08. Its C2 and C3 trailing stops are 10% and 20%; the other rules, parameters and costs are unchanged from notebook 07.
+
+The models' performance tables and plots are stored in notebooks 07 and 08. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
