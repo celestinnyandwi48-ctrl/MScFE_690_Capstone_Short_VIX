@@ -22,7 +22,8 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 │   ├── 04_VIX_Close_Study_1.ipynb
 │   ├── 05_SMA_crossover_trading_system.ipynb
 │   ├── 06_SMA_crossover_trading_system-HALFx.ipynb
-│   └── 07-Model_2073_SVXY-ONEx.ipynb
+│   ├── 07-Model_2073_SVXY-ONEx.ipynb
+│   └── 08-Model_2073_SVXY-HALFx.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -40,7 +41,7 @@ The repository structure organizes the published files by separating the noteboo
 
 ## Current notebooks and execution order
 
-The `00` to `07` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The paths in the table show where the data is located in this repository. Each notebook specifies where its input files must be placed when running the code.
+The `00` to `08` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The paths in the table show where the data is located in this repository. Each notebook specifies where its input files must be placed when running the code.
 The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
@@ -53,13 +54,14 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 05 | [SMA crossover experiment −1x](notebooks/05_SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
 | 06 | [SMA crossover experiment −0.5x](notebooks/06_SMA_crossover_trading_system-HALFx.ipynb) | `data/processed/SVXY_synth-HALFx.csv` | Development search with a 7.5% trailing stop and evaluation of the SMA 5/21 substitute baseline versus buy and hold in Development and Validation; tables and plots remain in the notebook |
 | 07 | [Model 2073 — Synthetic SVXY −1x](notebooks/07-Model_2073_SVXY-ONEx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation; tables and plots remain in the notebook |
+| 08 | [Model 2073 — Synthetic SVXY −0.5x](notebooks/08-Model_2073_SVXY-HALFx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-HALFx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation, using 10% and 20% trailing stops for C2 and C3; tables and plots remain in the notebook |
 
 For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
 
-Model 2073 uses VIX states to determine entries, additional purchases and exits. Its results include CAGR, Sharpe, Calmar and maximum drawdown after costs.
+Model 2073 uses VIX states to determine entries, additional purchases and exits. Its results include CAGR, Sharpe, Calmar and maximum drawdown after costs. Notebook 08 applies the same rules to synthetic SVXY −0.5x, with the C2 and C3 trailing stops reduced from 20% and 40% to 10% and 20%. The other parameters and costs are unchanged.
 
 ## Data and next stages
 
 See [data/README.md](data/README.md) for sources, coverage, columns, futures rescaling, and the construction of the synthetic SVXY.
 
-This repository is still under development. Notebook 07 now includes the Test results for Model 2073 on synthetic SVXY −1x. Further notebooks will cover the −0.5x model, rolling-window stability and the application to actual SVIX data.
+This repository is still under development. Notebooks 07 and 08 include the Test results for Model 2073 on synthetic SVXY −1x and −0.5x, respectively. Further notebooks will cover rolling-window stability and the application to actual SVIX data.
