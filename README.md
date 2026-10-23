@@ -20,7 +20,8 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 │   ├── 02_Synthetic_SVXY-ONEx.ipynb
 │   ├── 03_Synthetic_SVXY-HALFx.ipynb
 │   ├── 04_VIX_Close_Study_1.ipynb
-│   └── 05_SMA_crossover_trading_system.ipynb
+│   ├── 05_SMA_crossover_trading_system.ipynb
+│   └── 06_SMA_crossover_trading_system-HALFx.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -38,8 +39,8 @@ The repository structure organizes the published files by separating the noteboo
 
 ## Current notebooks and execution order
 
-The `00_` to `05_` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The column `Main output or study` indicate where is the data located in this repository, but not where the data is required or stored when running the code.
-All notebooks contain extensive explanations and comments to help readers understand the sequence of steps followed.
+The `00_` to `06_` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The column `Main output or study` indicate where is the data located in this repository, but not where the data is required or stored when running the code.
+The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
 |---|---|---|---|
@@ -48,8 +49,10 @@ All notebooks contain extensive explanations and comments to help readers unders
 | 02 | [Synthetic SVXY −1x](notebooks/02_Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
 | 03 | [Synthetic SVXY −0.5x](notebooks/03_Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
 | 04 | [VIX Close Study](notebooks/04_VIX_Close_Study_1.ipynb) | `data/raw/VIX_data.csv`; `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` | Descriptive statistics, daily ranges, percentile states, transition and episode studies; tables and plots remain in the notebook |
-| 05 | [SMA crossover experiment](notebooks/05_SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
+| 05 | [SMA crossover experiment −1x](notebooks/05_SMA_crossover_trading_system.ipynb) | `data/processed/SVXY_synth-ONEx.csv` | Development search and Validation comparison with buy and hold; tables and plots remain in the notebook |
+| 06 | [SMA crossover experiment −0.5x](notebooks/06_SMA_crossover_trading_system-HALFx.ipynb) | `data/processed/SVXY_synth-HALFx.csv` | Development search with a 7.5% trailing stop and evaluation of the SMA 5/21 substitute baseline versus buy and hold in Development and Validation; tables and plots remain in the notebook |
 
+For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
 
 ## Data and next stages
 
