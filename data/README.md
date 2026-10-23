@@ -1,6 +1,6 @@
 # Data inventory and methodology
 
-This directory stores the data used or produced by the capstone notebooks. raw/ contains the supplied input datasets. processed/ contains the selected futures term structure and the constructed SVXY time series.
+This directory stores the data used or produced by the Capstone notebooks. `raw/` contains the supplied input datasets. `processed/` contains the selected futures term structure and the constructed SVXY time series.
 Final date of the study is **September 16, 2026**. 
 
 
@@ -33,5 +33,12 @@ Although not used in this study, `Days_to_exp1` and `Days_to_exp2` follow the **
 
 ## SVXY synthetic scenarios
 
-Both synthetic notebooks take `SVXY_data.csv` and `SPVIXSTR.xlsx` as inputs to approximate consistent −1x and −0.5x daily exposures time series. The methodologies used are sufficiently explained in the comments of their respective notebooks.
+The [−1x synthetic notebook](../notebooks/02_Synthetic_SVXY-ONEx.ipynb) and the [−0.5x synthetic notebook](../notebooks/03_Synthetic_SVXY-HALFx.ipynb) take `SVXY_data.csv` and `SPVIXSTR.xlsx` as inputs to approximate consistent −1x and −0.5x daily exposure time series. The methodologies used are explained in the comments of their respective notebooks.
 
+## Trading system inputs
+
+The [−1x SMA notebook](../notebooks/05_SMA_crossover_trading_system.ipynb) uses `SVXY_synth-ONEx.csv`, and the [−0.5x SMA notebook](../notebooks/06_SMA_crossover_trading_system-HALFx.ipynb) uses `SVXY_synth-HALFx.csv`.
+
+[Model 2073 — Synthetic SVXY −1x](../notebooks/07-Model_2073_SVXY-1.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-ONEx.csv](processed/SVXY_synth-ONEx.csv), through September 16, 2026. To run notebook 07, place both files in the same folder as the notebook, keeping their existing filenames. VVIX and the futures curve are not inputs to this model.
+
+The model's performance tables and plots are stored in notebook 07. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
