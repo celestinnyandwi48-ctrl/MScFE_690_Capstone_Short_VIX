@@ -50,7 +50,7 @@ python -m pip install -r requirements.txt
 python -m notebook
 ```
 
-Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–08 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps and replace the corresponding data files when run. Notebook 00 does not reproduce the manual VVIX additions described in [data/README.md](data/README.md).
+Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–08 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
 
 [config.json](config.json) sets `raw_data_dir` to `data/raw` and `processed_data_dir` to `data/processed`. The notebooks locate the repository root from their working directory and its parents, then read these paths relative to that root. Model parameters remain in the notebooks.
 
@@ -63,7 +63,7 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 
 | Stage | Notebook | Inputs | Main output or study |
 |---|---|---|---|
-| 00 | [VIX, VVIX and SVXY retrieval](notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` and Cboe | `data/raw/VIX_data.csv`, `data/raw/VVIX_data.csv`, `data/raw/SVXY_data.csv` |
+| 00 | [VIX, VVIX and SVXY retrieval](notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_incomplete.csv`, `data/raw/SVXY_data.csv` |
 | 01 | [Cboe F1/F2 retrieval](notebooks/01_VIX_Futures_CBOE_F1_F2.ipynb) | Cboe monthly VX contract histories | `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` |
 | 02 | [Synthetic SVXY −1x](notebooks/02_Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
 | 03 | [Synthetic SVXY −0.5x](notebooks/03_Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
