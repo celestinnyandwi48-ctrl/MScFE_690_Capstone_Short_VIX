@@ -12,6 +12,8 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 ```text
 .
 ├── README.md
+├── CONTRIBUTORS.md
+├── config.json
 ├── requirements.txt
 ├── .gitignore
 ├── notebooks/
@@ -39,9 +41,24 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 
 The repository structure organizes the published files by separating the notebooks from the data. The data, in turn, is divided into raw data (obtained from data providers and necessary to perform the studies) and the processed data. Several outputs like tables, graphs, etc are not stored as separate files in the processed data folder, but rather within the notebooks themselves.
 
+## Installation and execution
+
+Download or clone the repository and open a terminal in its root folder. The notebook metadata records Python 3.11 and 3.12. Install the dependencies and start Jupyter with:
+
+```bash
+python -m pip install -r requirements.txt
+python -m notebook
+```
+
+Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–08 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps and replace the corresponding data files when run. Notebook 00 does not reproduce the manual VVIX additions described in [data/README.md](data/README.md).
+
+[config.json](config.json) sets `raw_data_dir` to `data/raw` and `processed_data_dir` to `data/processed`. The notebooks locate the repository root from their working directory and its parents, then read these paths relative to that root. Model parameters remain in the notebooks.
+
+Future notebooks must use these configured directories for input and output files: `raw` for original source data and `processed` for generated datasets. Data files should not be placed beside the notebooks.
+
 ## Current notebooks and execution order
 
-The `00` to `08` prefixes used to sort the notebooks indicate the workflow order that should be followed. All notebook links below point into `notebooks/`. The paths in the table show where the data is located in this repository. Each notebook specifies where its input files must be placed when running the code.
+The `00` to `08` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. The paths in the table show the default data locations defined in `config.json`.
 The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
