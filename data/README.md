@@ -7,7 +7,7 @@ Final date of the study is **September 16, 2026**.
 | File | Coverage in the supplied file | Data rows | Columns used |
 |---|---|---:|---|
 | [raw/VIX_data.csv](raw/VIX_data.csv) | 2004-03-26–2026-09-16 | 5,656 | `Date, Open, High, Low, Close` |
-| [raw/VVIX_data.csv](raw/VVIX_data.csv) | 2007-01-03–2026-09-16 | 4,948 | `Date, Open, High, Low, Close` |
+| [raw/VVIX_data.csv](raw/VVIX_data.csv) | 2007-01-03–2026-09-16 | 4,956 | `Date, Open, High, Low, Close` |
 | [raw/SVXY_data.csv](raw/SVXY_data.csv) | 2011-10-04–2026-09-16 | 3,759 | `Date, Open, High, Low, Close` |
 | [raw/SPVIXSTR.xlsx](raw/SPVIXSTR.xlsx) | 2012-12-27–2026-09-18 | 3,452 | `Date, Price` in columns A:B of `Sheet1`, with headers on Excel row 2 |
 | [processed/VIX_Futures_Term_Structure_F1_F2.csv](processed/VIX_Futures_Term_Structure_F1_F2.csv) | 2004-03-26–2026-09-16 | 5,656 | `Date, F1, F2, Days_to_exp1, Days_to_exp2` |
@@ -39,8 +39,10 @@ The [−1x synthetic notebook](../notebooks/02_Synthetic_SVXY-ONEx.ipynb) and th
 
 The [−1x SMA notebook](../notebooks/05_SMA_crossover_trading_system.ipynb) uses `SVXY_synth-ONEx.csv`, and the [−0.5x SMA notebook](../notebooks/06_SMA_crossover_trading_system-HALFx.ipynb) uses `SVXY_synth-HALFx.csv`.
 
-[Model 2073 — Synthetic SVXY −1x](../notebooks/07-Model_2073_SVXY-ONEx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-ONEx.csv](processed/SVXY_synth-ONEx.csv), through September 16, 2026. Notebook 07 reads these files from the raw and processed directories defined in [config.json](../config.json). VVIX and the futures curve are not inputs to this model.
+[Model search — Synthetic SVXY −1x](../notebooks/07-Model_Search.ipynb) uses the `Date` and `Close` columns from `raw/VIX_data.csv` and `processed/SVXY_synth-ONEx.csv`, through December 29, 2023. It reproduces the selection of Model 2073 using Development and Validation only. With `SAVE_RESULTS = True`, it saves the search summary, sensitivity summary, selected parameters and selected metrics under the configured `processed/model_search/` folder.
 
-[Model 2073 — Synthetic SVXY −0.5x](../notebooks/08-Model_2073_SVXY-HALFx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-HALFx.csv](processed/SVXY_synth-HALFx.csv), with the same cutoff. Notebook 08 reads these files from the same configured raw and processed directories. Its C2 and C3 trailing stops are 10% and 20%; the other rules, parameters and costs are unchanged from notebook 07.
+[Model 2073 — Synthetic SVXY −1x](../notebooks/08-Model_2073_SVXY-ONEx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-ONEx.csv](processed/SVXY_synth-ONEx.csv), through September 16, 2026. Notebook 08 reads these files from the raw and processed directories defined in [config.json](../config.json). VVIX and the futures curve are not inputs to this model.
 
-The models' performance tables and plots are stored in notebooks 07 and 08. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
+[Model 2073 — Synthetic SVXY −0.5x](../notebooks/09-Model_2073_SVXY-HALFx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-HALFx.csv](processed/SVXY_synth-HALFx.csv), with the same cutoff. Notebook 09 reads these files from the same configured raw and processed directories. Its C2 and C3 trailing stops are 10% and 20%; the other rules, parameters and costs are unchanged from notebook 08.
+
+The models' performance tables and plots are stored in notebooks 08 and 09. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
