@@ -26,7 +26,8 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 │   ├── 06_SMA_crossover_trading_system-HALFx.ipynb
 │   ├── 07-Model_Search.ipynb
 │   ├── 08-Model_2073_SVXY-ONEx.ipynb
-│   └── 09-Model_2073_SVXY-HALFx.ipynb
+│   ├── 09-Model_2073_SVXY-HALFx.ipynb
+│   └── 10-VIX_Decision_Margins.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -51,7 +52,7 @@ python -m pip install -r requirements.txt
 python -m notebook
 ```
 
-Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–09 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
+Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–10 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
 
 [config.json](config.json) sets `raw_data_dir` to `data/raw` and `processed_data_dir` to `data/processed`. The notebooks locate the repository root from their working directory and its parents, then read these paths relative to that root. Model parameters remain in the notebooks.
 
@@ -59,7 +60,7 @@ Future notebooks must use these configured directories for input and output file
 
 ## Current notebooks and execution order
 
-The `00` to `09` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. The paths in the table show the default data locations defined in `config.json`.
+The `00` to `10` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. The paths in the table show the default data locations defined in `config.json`.
 The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
@@ -74,6 +75,7 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 07 | [Model search — Synthetic SVXY −1x](notebooks/07-Model_Search.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Staged parameter search and sensitivity analysis using Development and Validation, reproducing the selection of Model 2073; optional summaries are saved in `data/processed/model_search/` |
 | 08 | [Model 2073 — Synthetic SVXY −1x](notebooks/08-Model_2073_SVXY-ONEx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation; tables and plots remain in the notebook |
 | 09 | [Model 2073 — Synthetic SVXY −0.5x](notebooks/09-Model_2073_SVXY-HALFx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-HALFx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation, using 10% and 20% trailing stops for C2 and C3; tables and plots remain in the notebook |
+| 10 | [VIX decision margins near the close](notebooks/10-VIX_Decision_Margins.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Appendix C table comparing VIX decision margins with each trade date's daily range divided by 26, using one continuous Development and Validation simulation; the table remains in the notebook |
 
 For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
 
