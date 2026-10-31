@@ -27,7 +27,7 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 │   ├── 07-Model_Search.ipynb
 │   ├── 08-Model_2073_SVXY-ONEx.ipynb
 │   ├── 09-Model_2073_SVXY-HALFx.ipynb
-│   └── 10-VIX_Decision_Margins.ipynb
+│   └── 10-VIX_Sensitivity_Analysis.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -75,7 +75,7 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 07 | [Model search — Synthetic SVXY −1x](notebooks/07-Model_Search.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Staged parameter search and sensitivity analysis using Development and Validation, reproducing the selection of Model 2073; optional summaries are saved in `data/processed/model_search/` |
 | 08 | [Model 2073 — Synthetic SVXY −1x](notebooks/08-Model_2073_SVXY-ONEx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation; tables and plots remain in the notebook |
 | 09 | [Model 2073 — Synthetic SVXY −0.5x](notebooks/09-Model_2073_SVXY-HALFx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-HALFx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation, using 10% and 20% trailing stops for C2 and C3; tables and plots remain in the notebook |
-| 10 | [VIX decision margins near the close](notebooks/10-VIX_Decision_Margins.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Appendix C table comparing VIX decision margins with each trade date's daily range divided by 26, using one continuous Development and Validation simulation; the table remains in the notebook |
+| 10 | [VIX signal sensitivity near the close](notebooks/10-VIX_Sensitivity_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Appendix C Monte Carlo sensitivity analysis: 200 simulations with small variations in VIX Close, using a fixed seed and one continuous Development and Validation account; the results table remains in the notebook |
 
 For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
 
