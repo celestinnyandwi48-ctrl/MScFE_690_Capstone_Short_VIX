@@ -37,6 +37,7 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
     │   ├── VIX_data.csv
     │   ├── VVIX_data.csv
     │   ├── SVXY_data.csv
+    │   ├── SVIX_data.csv
     │   └── SPVIXSTR.xlsx
     └── processed/
         ├── VIX_Futures_Term_Structure_F1_F2.csv
@@ -55,7 +56,7 @@ python -m pip install -r requirements.txt
 python -m notebook
 ```
 
-Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–11 can be run with the supplied data; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
+Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–13 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY, SVIX and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
 
 [config.json](config.json) sets `raw_data_dir` to `data/raw` and `processed_data_dir` to `data/processed`. The notebooks locate the repository root from their working directory and its parents, then read these paths relative to that root. Model parameters remain in the notebooks.
 
@@ -68,7 +69,7 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 
 | Stage | Notebook | Inputs | Main output or study |
 |---|---|---|---|
-| 00 | [VIX, VVIX and SVXY retrieval](notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_incomplete.csv`, `data/raw/SVXY_data.csv` |
+| 00 | [VIX, VVIX, SVXY and SVIX retrieval](notebooks/00_vix_vvix_svxy_data_retrieval.ipynb) | Yahoo Finance via `yfinance` | `data/raw/VIX_data.csv`, `data/raw/VVIX_incomplete.csv`, `data/raw/SVXY_data.csv`, `data/raw/SVIX_data.csv` |
 | 01 | [Cboe F1/F2 retrieval](notebooks/01_VIX_Futures_CBOE_F1_F2.ipynb) | Cboe monthly VX contract histories | `data/processed/VIX_Futures_Term_Structure_F1_F2.csv` |
 | 02 | [Synthetic SVXY −1x](notebooks/02_Synthetic_SVXY-ONEx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-ONEx.csv` |
 | 03 | [Synthetic SVXY −0.5x](notebooks/03_Synthetic_SVXY-HALFx.ipynb) | `data/raw/SVXY_data.csv`, `data/raw/SPVIXSTR.xlsx` | `data/processed/SVXY_synth-HALFx.csv` |
@@ -80,8 +81,8 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 09 | [Model 2073 — Synthetic SVXY −0.5x](notebooks/09-Model_2073_SVXY-HALFx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-HALFx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation, using 10% and 20% trailing stops for C2 and C3; tables and plots remain in the notebook |
 | 10 | [VIX signal sensitivity near the close](notebooks/10-VIX_Sensitivity_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Appendix C Monte Carlo sensitivity analysis: 200 simulations with small variations in VIX Close, using a fixed seed and one continuous Development and Validation account; the results table remains in the notebook |
 | 11 | [Model 2073 — Rolling-window stability](notebooks/11-Model_2073_Stability_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Overlapping three-year windows in Development and Validation; metrics, summary and chart saved to `Results/` |
-| 12 | [SVIX versus synthetic SVXY −1x — Daily return regression](notebooks/12-SVIX_SVXY-ONEx_Regression.ipynb) | `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Regression and scatter plot of aligned daily returns |
-| 13 | [Model 2073 — SVIX and synthetic SVXY −1x comparison](notebooks/13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb) | `data/VIX_data.csv`; `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Test and full available SVIX history comparisons: Model 2073 on SVIX, SVIX buy and hold, and Model 2073 on synthetic SVXY −1x; tables and three-curve plots saved to `Results/` |
+| 12 | [SVIX versus synthetic SVXY −1x — Daily return regression](notebooks/12-SVIX_SVXY-ONEx_Regression.ipynb) | `data/raw/SVIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Regression and scatter plot of aligned daily returns |
+| 13 | [Model 2073 — SVIX and synthetic SVXY −1x comparison](notebooks/13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb) | `data/raw/VIX_data.csv`; `data/raw/SVIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Test and full available SVIX history comparisons: Model 2073 on SVIX, SVIX buy and hold, and Model 2073 on synthetic SVXY −1x; tables and three-curve plots saved to `Results/` |
 
 ## Data sources
 
