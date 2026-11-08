@@ -27,7 +27,10 @@ Our studies use two synthetic versions of SVXY to examine -1x and -0.5x exposure
 │   ├── 07-Model_Search.ipynb
 │   ├── 08-Model_2073_SVXY-ONEx.ipynb
 │   ├── 09-Model_2073_SVXY-HALFx.ipynb
-│   └── 10-VIX_Sensitivity_Analysis.ipynb
+│   ├── 10-VIX_Sensitivity_Analysis.ipynb
+│   ├── 11-Model_2073_Stability_Analysis.ipynb
+│   ├── 12-SVIX_SVXY-ONEx_Regression.ipynb
+│   └── 13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb
 └── data/
     ├── README.md
     ├── raw/
@@ -52,15 +55,25 @@ python -m pip install -r requirements.txt
 python -m notebook
 ```
 
-Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–10 can be run directly; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
+Open a notebook from `notebooks/` and run its cells from top to bottom. The supplied datasets are the inputs used for the published analyses. With these files, notebooks 04–11 can be run with the supplied data; notebooks 02 and 03 rebuild the synthetic series if needed. Notebooks 00 and 01 are optional retrieval steps that replace the VIX, SVXY and F1/F2 data files when run. Notebook 00 saves its VVIX download as `data/raw/VVIX_incomplete.csv`, preserving the manually completed `VVIX_data.csv` for the analyses. The manual VVIX additions described in [data/README.md](data/README.md) are not part of the download code.
 
 [config.json](config.json) sets `raw_data_dir` to `data/raw` and `processed_data_dir` to `data/processed`. The notebooks locate the repository root from their working directory and its parents, then read these paths relative to that root. Model parameters remain in the notebooks.
 
 Future notebooks must use these configured directories for input and output files: `raw` for original source data and `processed` for generated datasets. Data files should not be placed beside the notebooks.
 
+### Running the SVIX notebooks (12–13)
+
+Both notebooks read CSV files from a flat `data/` folder relative to the kernel's working directory. They do not download SVIX. To reproduce the published results, use the original `SVIX_data.csv` snapshot through 2026-09-16, which is **not included in this repository**. Copy the following files into the run directory's `data/` folder:
+
+- `SVIX_data.csv` — original Yahoo Finance snapshot, supplied separately.
+- `SVXY_synth-ONEx.csv` — copy from [data/processed/](data/processed/).
+- `VIX_data.csv` — copy from [data/raw/](data/raw/); required only for Notebook 13.
+
+Run the notebooks with the kernel working directory set to the parent of that `data/` folder. The saved notebook outputs can be viewed on GitHub without these files.
+
 ## Current notebooks and execution order
 
-The `00` to `10` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. The paths in the table show the default data locations defined in `config.json`.
+The `00` to `13` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. For notebooks that use `config.json`, the table shows the default repository paths. Notebooks 12–13 use the flat input layout described above.
 The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
@@ -76,6 +89,9 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 08 | [Model 2073 — Synthetic SVXY −1x](notebooks/08-Model_2073_SVXY-ONEx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation; tables and plots remain in the notebook |
 | 09 | [Model 2073 — Synthetic SVXY −0.5x](notebooks/09-Model_2073_SVXY-HALFx.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-HALFx.csv` | Model comparison with buy and hold in Development, Validation, Test and a continuous full-history simulation, using 10% and 20% trailing stops for C2 and C3; tables and plots remain in the notebook |
 | 10 | [VIX signal sensitivity near the close](notebooks/10-VIX_Sensitivity_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Appendix C Monte Carlo sensitivity analysis: 200 simulations with small variations in VIX Close, using a fixed seed and one continuous Development and Validation account; the results table remains in the notebook |
+| 11 | [Model 2073 — Rolling-window stability](notebooks/11-Model_2073_Stability_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Overlapping three-year windows in Development and Validation; metrics, summary and chart saved to `Results/` |
+| 12 | [SVIX versus synthetic SVXY −1x — Daily return regression](notebooks/12-SVIX_SVXY-ONEx_Regression.ipynb) | `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Regression and scatter plot of aligned daily returns |
+| 13 | [Model 2073 — SVIX and synthetic SVXY −1x comparison](notebooks/13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb) | `data/VIX_data.csv`; `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Test and full available SVIX history comparisons: Model 2073 on SVIX, SVIX buy and hold, and Model 2073 on synthetic SVXY −1x; tables and three-curve plots saved to `Results/` |
 
 For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
 
@@ -83,8 +99,6 @@ Notebook 07 reproduces the search that selected Model 2073, using Development an
 
 Model 2073 uses VIX states to determine entries, additional purchases and exits. Its results include CAGR, Sharpe, Calmar and maximum drawdown after costs. Notebook 09 applies the same rules to synthetic SVXY −0.5x, with the C2 and C3 trailing stops reduced from 20% and 40% to 10% and 20%. The other parameters and costs are unchanged.
 
-## Data and next stages
+## Data sources
 
 See [data/README.md](data/README.md) for sources, coverage, columns, futures rescaling, and the construction of the synthetic SVXY.
-
-This repository is still under development. Notebooks 08 and 09 include the Test results for Model 2073 on synthetic SVXY −1x and −0.5x, respectively. Further notebooks will cover rolling-window stability and the application to actual SVIX data.
