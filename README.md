@@ -61,19 +61,9 @@ Open a notebook from `notebooks/` and run its cells from top to bottom. The supp
 
 Future notebooks must use these configured directories for input and output files: `raw` for original source data and `processed` for generated datasets. Data files should not be placed beside the notebooks.
 
-### Running the SVIX notebooks (12–13)
-
-Both notebooks read CSV files from a flat `data/` folder relative to the kernel's working directory. They do not download SVIX. To reproduce the published results, use the original `SVIX_data.csv` snapshot through 2026-09-16, which is **not included in this repository**. Copy the following files into the run directory's `data/` folder:
-
-- `SVIX_data.csv` — original Yahoo Finance snapshot, supplied separately.
-- `SVXY_synth-ONEx.csv` — copy from [data/processed/](data/processed/).
-- `VIX_data.csv` — copy from [data/raw/](data/raw/); required only for Notebook 13.
-
-Run the notebooks with the kernel working directory set to the parent of that `data/` folder. The saved notebook outputs can be viewed on GitHub without these files.
-
 ## Current notebooks and execution order
 
-The `00` to `13` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. For notebooks that use `config.json`, the table shows the default repository paths. Notebooks 12–13 use the flat input layout described above.
+The `00` to `13` prefixes used to sort the notebooks indicate the workflow order when rebuilding the data and analyses. All notebook links below point into `notebooks/`. For notebooks that use `config.json`, the table shows the default repository paths.
 The notebooks include comments to help readers follow the steps. The Capstone document provides the detailed methodological discussion.
 
 | Stage | Notebook | Inputs | Main output or study |
@@ -92,12 +82,6 @@ The notebooks include comments to help readers follow the steps. The Capstone do
 | 11 | [Model 2073 — Rolling-window stability](notebooks/11-Model_2073_Stability_Analysis.ipynb) | `data/raw/VIX_data.csv`; `data/processed/SVXY_synth-ONEx.csv` | Overlapping three-year windows in Development and Validation; metrics, summary and chart saved to `Results/` |
 | 12 | [SVIX versus synthetic SVXY −1x — Daily return regression](notebooks/12-SVIX_SVXY-ONEx_Regression.ipynb) | `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Regression and scatter plot of aligned daily returns |
 | 13 | [Model 2073 — SVIX and synthetic SVXY −1x comparison](notebooks/13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb) | `data/VIX_data.csv`; `data/SVIX_data.csv`; `data/SVXY_synth-ONEx.csv` | Test and full available SVIX history comparisons: Model 2073 on SVIX, SVIX buy and hold, and Model 2073 on synthetic SVXY −1x; tables and three-curve plots saved to `Results/` |
-
-For the −0.5x experiment, no pair met the original Development requirements. We use the 5-day/21-day pair, which had the highest Development CAGR, as a substitute baseline with a 7.5% trailing stop. It does not meet the original return requirement.
-
-Notebook 07 reproduces the search that selected Model 2073, using Development and Validation only. The Final Test period is not used in the search or selection.
-
-Model 2073 uses VIX states to determine entries, additional purchases and exits. Its results include CAGR, Sharpe, Calmar and maximum drawdown after costs. Notebook 09 applies the same rules to synthetic SVXY −0.5x, with the C2 and C3 trailing stops reduced from 20% and 40% to 10% and 20%. The other parameters and costs are unchanged.
 
 ## Data sources
 
