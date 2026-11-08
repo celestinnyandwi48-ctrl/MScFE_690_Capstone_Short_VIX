@@ -9,6 +9,7 @@ Final date of the study is **September 16, 2026**.
 | [raw/VIX_data.csv](raw/VIX_data.csv) | 2004-03-26–2026-09-16 | 5,656 | `Date, Open, High, Low, Close` |
 | [raw/VVIX_data.csv](raw/VVIX_data.csv) | 2007-01-03–2026-09-16 | 4,956 | `Date, Open, High, Low, Close` |
 | [raw/SVXY_data.csv](raw/SVXY_data.csv) | 2011-10-04–2026-09-16 | 3,759 | `Date, Open, High, Low, Close` |
+| [raw/SVIX_data.csv](raw/SVIX_data.csv) | 2022-03-30–2026-09-16 | 1,120 | `Date, Close` for analysis; adjusted Close and corporate actions for validation |
 | [raw/SPVIXSTR.xlsx](raw/SPVIXSTR.xlsx) | 2012-12-27–2026-09-18 | 3,452 | `Date, Price` in columns A:B of `Sheet1`, with headers on Excel row 2 |
 | [processed/VIX_Futures_Term_Structure_F1_F2.csv](processed/VIX_Futures_Term_Structure_F1_F2.csv) | 2004-03-26–2026-09-16 | 5,656 | `Date, F1, F2, Days_to_exp1, Days_to_exp2` |
 | [processed/SVXY_synth-ONEx.csv](processed/SVXY_synth-ONEx.csv) | 2011-10-04–2026-09-16 | 3,759 | `Date, Open, High, Low, Close` |
@@ -17,7 +18,7 @@ Final date of the study is **September 16, 2026**.
 
 ## Market input data
 
-`VIX_data.csv` and `SVXY_data.csv` are downloaded from Yahoo Finance through the `yfinance` library using [the retrieval notebook](../notebooks/00_vix_vvix_svxy_data_retrieval.ipynb). The published `VVIX_data.csv` starts from the same source and includes the manual additions described below.
+`VIX_data.csv`, `SVXY_data.csv`, and `SVIX_data.csv` are downloaded from Yahoo Finance through the `yfinance` library using [the retrieval notebook](../notebooks/00_vix_vvix_svxy_data_retrieval.ipynb). The published `VVIX_data.csv` starts from the same source and includes the manual additions described below.
 
 **VVIX data note**: The Yahoo Finance VVIX dataset had eight missing observations. We added only their Close values manually from Cboe's historical data, without interpolation. Open, High, and Low remain blank for those dates. This manual addition is not included in the retrieval notebook's download code. New VVIX downloads are saved as `raw/VVIX_incomplete.csv`, preserving the manually completed `raw/VVIX_data.csv` for the analyses.
 
@@ -46,3 +47,5 @@ The [−1x SMA notebook](../notebooks/05_SMA_crossover_trading_system.ipynb) use
 [Model 2073 — Synthetic SVXY −0.5x](../notebooks/09-Model_2073_SVXY-HALFx.ipynb) uses the `Date` and `Close` columns from [raw/VIX_data.csv](raw/VIX_data.csv) and [processed/SVXY_synth-HALFx.csv](processed/SVXY_synth-HALFx.csv), with the same cutoff. Notebook 09 reads these files from the same configured raw and processed directories. Its C2 and C3 trailing stops are 10% and 20%; the other rules, parameters and costs are unchanged from notebook 08.
 
 The models' performance tables and plots are stored in notebooks 08 and 09. They cover Development, Validation, Test and a continuous full-history simulation, each compared with buy and hold.
+
+Notebooks [12](../notebooks/12-SVIX_SVXY-ONEx_Regression.ipynb) and [13](../notebooks/13-Model_2073_SVIX_SVXY-ONEx_Comparison.ipynb) read the published SVIX study snapshot from the configured raw directory and synthetic SVXY −1x from the processed directory. Notebook 13 also reads VIX from the raw directory. Running notebook 00 downloads SVIX again and replaces its raw CSV.
